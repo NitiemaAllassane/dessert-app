@@ -1,5 +1,5 @@
 import AddButton from "./AddButton";
-import QuantitySelector from "./QuantitySelector";
+// import QuantitySelector from "./QuantitySelector";
 
 interface DessertCardProps {
     image: {
@@ -29,8 +29,8 @@ function DessertCard({
                     <img src={image.desktop} alt={name} className="w-full h-full object-cover rounded-lg" />
                 </picture>
 
-                {/* <AddButton  /> */}
-                <QuantitySelector  />
+                <AddButton  />
+                {/* <QuantitySelector  /> */}
             </div>
             <div>
                 <p className="font-medium text-gray-400">{category}</p>

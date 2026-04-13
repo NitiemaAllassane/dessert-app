@@ -1,10 +1,11 @@
 import DessertCard from "./components/DessertCard";
+import Cart from "./components/Cart";
 
 
 function App() {
     return (
-        <main className="bg-rose-50 min-h-dvh">
-            <div className="container">
+        <main className="bg-rose-50 min-h-dvh py-12">
+            <div className="container flex gap-8">
                 <div className="list">
                     <h1 className="text-4xl font-bold mb-6">Desserts</h1>
                     <div className="grid grid-cols-3 gap-6">
@@ -43,7 +44,7 @@ function App() {
                     </div>
                 </div>
                 <div className="basket">
-                    {/* Mettre le composant panier ici */}
+                    <Cart  />
                 </div>
             </div>
         </main>
