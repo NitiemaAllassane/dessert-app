@@ -7,7 +7,7 @@ function IncrementButton() {
             cursor-pointer hover:bg-white'
         >
             <span>
-                <Plus size={16} className='text-white group-hover:text-rose-500'   />
+                <Plus size={16} className='text-white group-hover:text-(--red)'   />
             </span>
         </button>
     )
@@ -19,7 +19,7 @@ function DecrementButton() {
             className='group w-6 h-6 flex items-center justify-center border border-white rounded-full
             cursor-pointer hover:bg-white'
         >
-            <Minus size={16} className='text-white group-hover:text-rose-500'  />
+            <Minus size={16} className='text-white group-hover:text-(--red)'  />
         </button>
     )
 }
@@ -28,7 +28,7 @@ function DecrementButton() {
 function QuantitySelector() {
     return (
         <div 
-            className='flex items-center justify-between gap-1 bg-rose-700 w-[70%] p-2 
+            className='flex items-center justify-between gap-1 bg-(--red) w-[70%] p-2 
             rounded-full absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2'
         >
             

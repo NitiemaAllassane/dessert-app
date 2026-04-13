@@ -1,5 +1,5 @@
 import AddButton from "./AddButton";
-// import QuantitySelector from "./QuantitySelector";
+import QuantitySelector from "./QuantitySelector";
 
 interface DessertCardProps {
     image: {
@@ -33,9 +33,9 @@ function DessertCard({
                 {/* <QuantitySelector  /> */}
             </div>
             <div>
-                <p className="font-medium text-gray-400">{category}</p>
-                <h2 className="text-lg font-semibold text-black">{name}</h2>
-                <p className="text-lg font-bold text-rose-400">${price}</p>
+                <p className="font-medium text-(--rose-400) ">{category}</p>
+                <h2 className="text-lg font-semibold text-(--rose-900)">{name}</h2>
+                <p className="text-lg font-bold text-(--red)">${price}</p>
             </div>
         </article>
     )
