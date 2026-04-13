@@ -75,7 +75,7 @@ function ConfirmButton() {
 
 function Cart() {
     return (
-        <aside className='bg-white w-90 p-6 rounded-lg'>
+        <aside className='bg-white lg:w-90 p-6 rounded-lg'>
             <div>
                 <h2 className='text-xl text-(--red) font-bold mb-8'>
                     Your Cart (0)
@@ -114,7 +114,7 @@ function Cart() {
                         <figure>
                             <img src={carbobIcon} alt="Icon Carbon neutral" />
                         </figure>
-                        <p className='text-(--rose-900)'>
+                        <p className='text-(--rose-900) text-sm md:text-[16px]'>
                             This is a <strong>carbon-neutral</strong> delivery
                         </p>
                     </article>
