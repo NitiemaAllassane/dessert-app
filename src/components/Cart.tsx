@@ -1,5 +1,6 @@
 import emptyImage from '../../public/assets/images/illustration-empty-cart.svg';
 import carbobIcon from '../../public/assets/images/icon-carbon-neutral.svg'
+import PrimaryButton from './PrimaryButton';
 import { X } from 'lucide-react';
 
 interface CartItemProps {
@@ -48,7 +49,7 @@ function CartItem({name, price, quantity}: CartItemProps) {
 }
 
 
-function OrderTotal({ value }: { value: number}) {
+export function OrderTotal({ value }: { value: number}) {
     return (
         <div className='flex items-center justify-between'>
             <h3 className='text-(--rose-500) font-medium'>
@@ -61,28 +62,17 @@ function OrderTotal({ value }: { value: number}) {
     )
 }
 
-function ConfirmButton() {
-    return (
-        <button 
-            className='bg-(--red) inline-block w-full p-3 
-            rounded-full text-white font-medium cursor-pointer'
-        >
-            Confirm Order
-        </button>
-    )
-}
-
 
 function Cart() {
     return (
-        <aside className='bg-white lg:w-90 p-6 rounded-lg'>
+        <aside className='lg:sticky lg:top-12 bg-white lg:w-90 p-6 rounded-lg'>
             <div>
                 <h2 className='text-xl text-(--red) font-bold mb-8'>
                     Your Cart (0)
                 </h2>
                 {/* <EmptyState  /> */}
                 
-                <section>
+                <div>
                     <div className='grid grid-cols-1 gap-6 mb-12'>
                         <CartItem  
                             name='Classic Tiramisu'
@@ -109,7 +99,7 @@ function Cart() {
 
                     <article 
                         className='flex items-center justify-center gap-2 
-                        bg-(--rose-100) p-4 rounded-lg mb-3'
+                        bg-(--rose-50) p-4 rounded-lg mb-3'
                     >
                         <figure>
                             <img src={carbobIcon} alt="Icon Carbon neutral" />
@@ -118,9 +108,9 @@ function Cart() {
                             This is a <strong>carbon-neutral</strong> delivery
                         </p>
                     </article>
-                </section>
 
-                <ConfirmButton  />
+                    <PrimaryButton content='Confirm Order'  />
+                </div>
             </div>
         </aside>
     )
