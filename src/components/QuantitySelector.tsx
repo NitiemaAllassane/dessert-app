@@ -29,18 +29,16 @@ function QuantitySelector() {
     return (
         <div 
             className='flex items-center justify-between gap-1 bg-rose-700 w-[70%] p-2 
-            rounded-full absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 cursor-pointer'
+            rounded-full absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2'
         >
             
             <DecrementButton  />
-            <input 
-                type="number" 
-                name="quantityValue" 
-                id="quantityValue"
-                value={0}
-                readOnly
-                className='w-8 text-white font-medium text-center outline-none border-none'
-            />
+            <div
+                className='w-8 flex items-center justify-center text-white text-lg font-medium text-center 
+                outline-none border-none bg-transparent'
+            >
+                0
+            </div>
             <IncrementButton  />
         </div>
     )
