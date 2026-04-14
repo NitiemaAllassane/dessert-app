@@ -1,6 +1,6 @@
 # Frontend Mentor - Product list with cart solution
 
-This is a solution to the [Product list with cart challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Product list with cart challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d).
 
 ## Table of contents
 
@@ -14,12 +14,8 @@ This is a solution to the [Product list with cart challenge on Frontend Mentor](
     - [Built with](#built-with)
     - [What I learned](#what-i-learned)
     - [Continued development](#continued-development)
-    - [Useful resources](#useful-resources)
     - [AI Collaboration](#ai-collaboration)
   - [Author](#author)
-  - [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -36,93 +32,66 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](/public/assets/screenshots/dessert-app-desktop.png)
+![](/public/assets/screenshots/dessert-selected.png)
+![](/public/assets/screenshots/dessert-modal-desktop.png)
+![](/public/assets/screenshots/dessert-app-mobile.png)
+![](/public/assets/screenshots/desset-selected-mobile.png)
+![](/public/assets/screenshots/dessert-modal-mobile.png)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [[Add live site URL here](https://dessert-app-ashen.vercel.app/)](https://dessert-app-ashen.vercel.app/)
 
 ## My process
 
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [clsx](https://github.com/lukeed/clsx)
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+The biggest challenge was managing shared state between `DessertCard` and `Cart`. 
+I learned that when two sibling components need the same data, 
+the state must live in their closest common parent — in this case `App`.
 
-To see how you can add code snippets, see below:
+Instead of storing quantity locally in each `DessertCard`, 
+I lifted it up to `App` using a `CartItemsType[]` array, 
+and passed down `onIncrementQuantity` and `onDecrementQuantity` as props.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+This kept each component's responsibility clear:
+- `App` owns the state and the logic
+- `DessertCard` displays and triggers actions
+- `Cart` reads and displays the cart data
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
-
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- Improve accessibility (keyboard navigation, ARIA attributes)
+- Add animations on the modal and cart updates
+- Explore global state management with Zustand or Context API for larger scale projects
 
 ### AI Collaboration
 
-Describe how you used AI tools (if any) during this project. This helps demonstrate your ability to work effectively with AI assistants.
+I used Claude (by Anthropic) during this project for guidance on specific problems.
 
-- What tools did you use (e.g., ChatGPT, Claude, GitHub Copilot)?
-- How did you use them (e.g., debugging, generating boilerplate, brainstorming solutions)?
-- What worked well? What didn't?
-
-**Note: Delete this note and the content above if you didn't use AI, or replace with your own experience.**
+- **How I used it**: I wrote all the code myself. I used Claude to help me think through 
+state management logic, debug TypeScript errors, and fix calculation bugs in the cart.
+- **What worked well**: Talking through the architecture before writing code 
+helped me avoid bad patterns like passing `setCartItems` directly as a prop, 
+or storing quantity inside the JSON data.
+- **What didn't**: Sometimes I had to push back and re-explain my exact problem 
+to get the most relevant answer.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Frontend Mentor - [@NitiemaAllassane](https://www.frontendmentor.io/profile/NitiemaAllassane)
+- My Blog (In french) - [Nitiema Allassane](https://nitiema-allassane.vercel.app/)
