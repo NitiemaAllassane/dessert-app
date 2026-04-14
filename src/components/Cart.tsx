@@ -8,10 +8,12 @@ interface CartItemProps {
     name: string;
     price: number;
     quantity: number;
+    onRemoving: () => void;
 }
 
 interface CartProps {
     cartItems: CartItemsType[];
+    onRemove: (id: string) => void;
 }
 
 function EmptyState() {
@@ -30,7 +32,7 @@ function EmptyState() {
 }
 
 
-function CartItem({name, price, quantity}: CartItemProps) {
+function CartItem({name, price, quantity, onRemoving}: CartItemProps) {
     
     return (
         <article className='flex items-center justify-between'>
@@ -46,6 +48,7 @@ function CartItem({name, price, quantity}: CartItemProps) {
             <button 
                 className='group text-(--rose-400) w-5 h-5 rounded-full border border-(--rose-400) 
                 flex items-center justify-center cursor-pointer hover:border-(--rose-900)'
+                onClick={onRemoving}
             >
                 <X size={14} className='group-hover:text-(--rose-900)' />
             </button>
@@ -68,7 +71,7 @@ export function OrderTotal({ value }: { value: number}) {
 }
 
 
-function Cart({ cartItems }: CartProps) {
+function Cart({ cartItems, onRemove }: CartProps) {
 
     const orderQuantities = cartItems.map((item) => item.quantity);
     const itemsQuantity = orderQuantities.reduce((prevQuantity, currentQuantity) => prevQuantity + currentQuantity, 0);
@@ -94,6 +97,7 @@ function Cart({ cartItems }: CartProps) {
                                         name={item.name}
                                         price={item.price}
                                         quantity={item.quantity}
+                                        onRemoving={() => onRemove(item.name)}
                                     />
                                 </li>
                             ))}

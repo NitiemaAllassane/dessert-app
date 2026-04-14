@@ -22,6 +22,11 @@ function App() {
         setCartItems(newCartItems);
     }
 
+    function removeItemToCart(id: string) {
+        const removedItems = cartItems.filter((item) => item.name !== id);
+        setCartItems(removedItems)
+    }
+
     // increment CartItems quantity
     function incrementQuantity(id: string) {
         const incrementedCartItems = cartItems.map((item) => {
@@ -80,6 +85,7 @@ function App() {
                 <div className="basket">
                     <Cart  
                         cartItems={cartItems}
+                        onRemove={removeItemToCart}
                     />
                 </div>
             </div>
