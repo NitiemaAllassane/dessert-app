@@ -62,40 +62,49 @@ function App() {
 
     
     return (
-        <main className="relative bg-(--rose-100) min-h-dvh py-12">
-            <div className="container flex flex-col lg:flex-row gap-8">
-                <div className="list">
-                    <h1 className="text-4xl font-bold mb-6">Desserts</h1>
-                    <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-12 sm:gap-6 list-none">
-                        {data.map((dessert) => (
-                            <li key={dessert.name}>
-                                <DessertCard  
-                                    image={{
-                                        mobile: dessert.image.mobile,
-                                        tablet: dessert.image.tablet,
-                                        desktop: dessert.image.desktop,
-                                    }}
-                                    category={dessert.category}
-                                    name={dessert.name}
-                                    price={dessert.price}
-                                    onAdding={() => addToCart({...dessert, quantity: 1})}
-                                    quantity={cartItems.find(item => item.name === dessert.name)?.quantity ?? 0}
-                                    onIncrementQuantity={() => incrementQuantity(dessert.name)}
-                                    onDecrementQuantity={() => decrementQuantity(dessert.name)}
-                                />
-                            </li>
-                        ))}
-                    </ul>
+        <>
+            <main className="relative bg-(--rose-50) min-h-dvh py-12">
+                <div className="container flex flex-col lg:flex-row gap-8">
+                    <div className="list">
+                        <h1 className="text-4xl font-bold mb-6">Desserts</h1>
+                        <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-12 sm:gap-6 list-none">
+                            {data.map((dessert) => (
+                                <li key={dessert.name}>
+                                    <DessertCard  
+                                        image={{
+                                            mobile: dessert.image.mobile,
+                                            tablet: dessert.image.tablet,
+                                            desktop: dessert.image.desktop,
+                                        }}
+                                        category={dessert.category}
+                                        name={dessert.name}
+                                        price={dessert.price}
+                                        onAdding={() => addToCart({...dessert, quantity: 1})}
+                                        quantity={cartItems.find(item => item.name === dessert.name)?.quantity ?? 0}
+                                        onIncrementQuantity={() => incrementQuantity(dessert.name)}
+                                        onDecrementQuantity={() => decrementQuantity(dessert.name)}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="basket">
+                        <Cart  
+                            cartItems={cartItems}
+                            onRemove={removeItemToCart}
+                            initializeCart={initCartItems}
+                        />
+                    </div>
                 </div>
-                <div className="basket">
-                    <Cart  
-                        cartItems={cartItems}
-                        onRemove={removeItemToCart}
-                        initializeCart={initCartItems}
-                    />
-                </div>
-            </div>
-        </main>
+            </main>
+
+            <footer className="bg-(--rose-50) text-center p-4">
+                <p className="text-sm">
+                    Challenge by <a href="https://www.frontendmentor.io/challenges" className="underline text-(--red) ">Frontend Mentor</a>. 
+                    Coded by <a href="https://nitiema-allassane.vercel.app/" className="underline text-(--red)">Nitiema Allassane</a>.
+                </p>
+            </footer>
+        </>
     )
 }
 
