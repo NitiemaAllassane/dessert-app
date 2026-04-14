@@ -2,11 +2,16 @@ import emptyImage from '../../public/assets/images/illustration-empty-cart.svg';
 import carbobIcon from '../../public/assets/images/icon-carbon-neutral.svg'
 import PrimaryButton from './PrimaryButton';
 import { X } from 'lucide-react';
+import type { CartItemsType } from '../types/types';
 
 interface CartItemProps {
     name: string;
     price: number;
     quantity: number;
+}
+
+interface CartProps {
+    cartItems: CartItemsType[];
 }
 
 function EmptyState() {
@@ -63,54 +68,50 @@ export function OrderTotal({ value }: { value: number}) {
 }
 
 
-function Cart() {
+function Cart({ cartItems }: CartProps) {
     return (
         <aside className='lg:sticky lg:top-12 bg-white lg:w-90 p-6 rounded-lg'>
             <div>
                 <h2 className='text-xl text-(--red) font-bold mb-8'>
                     Your Cart (0)
                 </h2>
-                {/* <EmptyState  /> */}
                 
-                <div>
-                    <div className='grid grid-cols-1 gap-6 mb-12'>
-                        <CartItem  
-                            name='Classic Tiramisu'
-                            price={5.50}
-                            quantity={1}
-                        />
+                {cartItems.length === 0 ? (
+                    <EmptyState  />
+                ): (
+                    <div>
+                        <ul className='grid grid-cols-1 gap-6 mb-12 list-none'>
+                            {cartItems.map((item) => (
+                                <li key={item.name}>
+                                    <CartItem  
+                                        name={item.name}
+                                        price={item.price}
+                                        quantity={item.quantity}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
 
-                        <CartItem  
-                            name='Classic Tiramisu'
-                            price={12.50}
-                            quantity={4}
-                        />
+                        <div className='mb-8'>
+                            <OrderTotal value={46.50} />
+                        </div>
 
-                        <CartItem  
-                            name='Classic Tiramisu'
-                            price={7.20}
-                            quantity={2}
-                        />
+                        <article 
+                            className='flex items-center justify-center gap-2 
+                            bg-(--rose-50) p-4 rounded-lg mb-3'
+                        >
+                            <figure>
+                                <img src={carbobIcon} alt="Icon Carbon neutral" />
+                            </figure>
+                            <p className='text-(--rose-900) text-sm md:text-[16px]'>
+                                This is a <strong>carbon-neutral</strong> delivery
+                            </p>
+                        </article>
+
+                        <PrimaryButton content='Confirm Order'  />
                     </div>
-
-                    <div className='mb-8'>
-                        <OrderTotal value={46.50} />
-                    </div>
-
-                    <article 
-                        className='flex items-center justify-center gap-2 
-                        bg-(--rose-50) p-4 rounded-lg mb-3'
-                    >
-                        <figure>
-                            <img src={carbobIcon} alt="Icon Carbon neutral" />
-                        </figure>
-                        <p className='text-(--rose-900) text-sm md:text-[16px]'>
-                            This is a <strong>carbon-neutral</strong> delivery
-                        </p>
-                    </article>
-
-                    <PrimaryButton content='Confirm Order'  />
-                </div>
+                )
+            }
             </div>
         </aside>
     )

@@ -1,32 +1,56 @@
+import { useState } from "react";
 import DessertCard from "./components/DessertCard";
 import Cart from "./components/Cart";
 // import ConfirmationModal from "./components/ConfirmationModal";
 import data from '../data.json';
+import type { CartItemsType } from "./types/types";
 
 
 function App() {
+    const [cartItems, setCartItems] = useState<CartItemsType[]>([]);
+
+    // Add Dessert to Cart
+    function addToCart(item: CartItemsType) {
+        const newCartItems = cartItems.slice();
+        const alreadyInCart = newCartItems.some(
+            (cartItem) => cartItem.name === item.name
+        );
+
+        if (alreadyInCart) return;
+
+        newCartItems.push(item);
+        setCartItems(newCartItems);
+    }
+
+
+    
     return (
         <main className="relative bg-(--rose-100) min-h-dvh py-12">
             <div className="container flex flex-col lg:flex-row gap-8">
                 <div className="list">
                     <h1 className="text-4xl font-bold mb-6">Desserts</h1>
-                    <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-12 sm:gap-6">
+                    <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-12 sm:gap-6 list-none">
                         {data.map((dessert) => (
-                            <DessertCard  
-                            image={{
-                                mobile: dessert.image.mobile,
-                                tablet: dessert.image.tablet,
-                                desktop: dessert.image.desktop,
-                            }}
-                            category={dessert.category}
-                            name={dessert.name}
-                            price={dessert.price}
-                        />
+                            <li key={dessert.name}>
+                                <DessertCard  
+                                    image={{
+                                        mobile: dessert.image.mobile,
+                                        tablet: dessert.image.tablet,
+                                        desktop: dessert.image.desktop,
+                                    }}
+                                    category={dessert.category}
+                                    name={dessert.name}
+                                    price={dessert.price}
+                                    onAdding={() => addToCart({...dessert, quantity: 0})}
+                                />
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
                 <div className="basket">
-                    <Cart  />
+                    <Cart  
+                        cartItems={cartItems}
+                    />
                 </div>
             </div>
 
