@@ -69,11 +69,18 @@ export function OrderTotal({ value }: { value: number}) {
 
 
 function Cart({ cartItems }: CartProps) {
+
+    const orderQuantities = cartItems.map((item) => item.quantity);
+    const itemsQuantity = orderQuantities.reduce((prevQuantity, currentQuantity) => prevQuantity + currentQuantity, 0);
+
+    const orderTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+
     return (
         <aside className='lg:sticky lg:top-12 bg-white lg:w-90 p-6 rounded-lg'>
             <div>
                 <h2 className='text-xl text-(--red) font-bold mb-8'>
-                    Your Cart (0)
+                    Your Cart ({itemsQuantity})
                 </h2>
                 
                 {cartItems.length === 0 ? (
@@ -93,7 +100,7 @@ function Cart({ cartItems }: CartProps) {
                         </ul>
 
                         <div className='mb-8'>
-                            <OrderTotal value={46.50} />
+                            <OrderTotal value={orderTotal} />
                         </div>
 
                         <article 
