@@ -22,6 +22,33 @@ function App() {
         setCartItems(newCartItems);
     }
 
+    // increment CartItems quantity
+    function incrementQuantity(id: string) {
+        const incrementedCartItems = cartItems.map((item) => {
+            if (item.name === id) {
+                return {...item, quantity: item.quantity + 1}
+            }
+
+            return item;
+        });
+
+        setCartItems(incrementedCartItems);
+    }
+
+
+    // increment CartItems quantity
+    function decrementQuantity(id: string) {
+       const decrementedCartItems = cartItems.map((item) => {
+            if (item.name === id && item.quantity !== 0) {
+                return {...item, quantity: item.quantity - 1}
+            }
+
+            return item;
+        }).filter((item) => item.quantity > 0);;
+
+        setCartItems(decrementedCartItems);
+    }
+
 
     
     return (
@@ -41,7 +68,10 @@ function App() {
                                     category={dessert.category}
                                     name={dessert.name}
                                     price={dessert.price}
-                                    onAdding={() => addToCart({...dessert, quantity: 0})}
+                                    onAdding={() => addToCart({...dessert, quantity: 1})}
+                                    quantity={cartItems.find(item => item.name === dessert.name)?.quantity ?? 0}
+                                    onIncrementQuantity={() => incrementQuantity(dessert.name)}
+                                    onDecrementQuantity={() => decrementQuantity(dessert.name)}
                                 />
                             </li>
                         ))}

@@ -13,6 +13,9 @@ interface DessertCardProps {
     name: string;
     price: number;
     onAdding: () => void;
+    quantity: number;
+    onIncrementQuantity: () => void;
+    onDecrementQuantity: () => void;
 }
 
 
@@ -22,38 +25,24 @@ function DessertCard({
     name, 
     price,
     onAdding,
+    quantity,
+    onIncrementQuantity,
+    onDecrementQuantity
 }: DessertCardProps
 ) {
     const [isSelected, setIsSlected] = useState(false);
-    const [quantity, setQuantity] = useState(0);
 
     function switchToSelectedMode() {
         if (isSelected) return;
         setIsSlected(true);
-        setQuantity(1);
     }
-
-    function incrementQuantity() {
-        setQuantity(quantity + 1);
-    }
-
-    function decrementQuantity() {
-        if (quantity === 0) return;
-        if (quantity === 1) {
-            setQuantity(0);
-            setIsSlected(false);
-            return;
-        }
-        setQuantity(quantity - 1);
-    }
-
 
 
     return (
         <article>
             <div className={clsx(
                 "relative mb-8 rounded-lg",
-                isSelected && "outline-3 outline-(--red)"
+                isSelected && quantity !== 0 ? "outline-3 outline-(--red)": ""
             )}>
                 <picture className="h-full w-full rounded-lg">
                     <source media="(max-width: 375px)" srcSet={image.mobile} className="w-full h-full object-cover " />
@@ -61,14 +50,12 @@ function DessertCard({
                     <img src={image.desktop} alt={name} className="w-full h-full object-cover rounded-lg" />
                 </picture>
 
-                {isSelected 
+                {isSelected && quantity !== 0
                     ? (
                         <QuantitySelector 
                             quantity={quantity} 
-                            onIncrement={incrementQuantity}
-                            onDecrement={
-                                decrementQuantity
-                            }
+                            onIncrement={onIncrementQuantity}
+                            onDecrement={onDecrementQuantity}
                         />
                     )
                     : (
