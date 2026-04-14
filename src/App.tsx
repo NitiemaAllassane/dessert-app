@@ -1,7 +1,6 @@
 import { useState } from "react";
 import DessertCard from "./components/DessertCard";
 import Cart from "./components/Cart";
-// import ConfirmationModal from "./components/ConfirmationModal";
 import data from '../data.json';
 import type { CartItemsType } from "./types/types";
 
@@ -22,10 +21,16 @@ function App() {
         setCartItems(newCartItems);
     }
 
+    // Remove items to Cart
     function removeItemToCart(id: string) {
         const removedItems = cartItems.filter((item) => item.name !== id);
         setCartItems(removedItems)
     }
+
+    function initCartItems() {
+        setCartItems([])
+    }
+
 
     // increment CartItems quantity
     function incrementQuantity(id: string) {
@@ -86,11 +91,10 @@ function App() {
                     <Cart  
                         cartItems={cartItems}
                         onRemove={removeItemToCart}
+                        initializeCart={initCartItems}
                     />
                 </div>
             </div>
-
-            {/* <ConfirmationModal  /> */}
         </main>
     )
 }
